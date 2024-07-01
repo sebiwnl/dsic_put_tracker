@@ -1,6 +1,7 @@
 {
     "putts": [
         {
+            "id": 1,
             "date": "2024-7-1",
             "attempts": 21,
             "six": 18,
@@ -8,6 +9,7 @@
             "ninefive": 6
         },
         {
+            "id": 2,
             "date": "2024-7-1",
             "attempts": 21,
             "six": 18,
@@ -15,6 +17,7 @@
             "ninefive": 4
         },
         {
+            "id": 3,
             "date": "2024-7-1",
             "attempts": 21,
             "six": 19,

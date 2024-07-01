@@ -125,6 +125,7 @@ function create_div(dataList) {
     const putt75m = dataList['sevenfive'];
     const putt95m = dataList['ninefive'];
     const attempts = dataList['attempts'];
+    const id = dataList['id'];
 
     
 
@@ -138,6 +139,7 @@ function create_div(dataList) {
 
     // Create a new td
     const newTableRow = document.createElement('tr');
+    newTableRow.setAttribute('data-id', id);  // Add data-id attribute
 
     // Create columns for each stat
     newTableRow.innerHTML = `
@@ -146,11 +148,40 @@ function create_div(dataList) {
         <th class="${getColor(sixMeterPercentage,1)}">${putt6m} (${sixMeterPercentage}%)</th>
         <th class="${getColor(sevenFiveMeterPercentage,2)}">${putt75m} (${sevenFiveMeterPercentage}%)</th>
         <th class="${getColor(nineFiveMeterPercentage,3)}">${putt95m} (${nineFiveMeterPercentage}%)</th>
-        <th class="${getColor(totalPuttPercentage,4)}">${totalPuttPercentage} %</th>    
+        <th class="${getColor(totalPuttPercentage,4)}">${totalPuttPercentage} %</th>
+        <th class="text-right" ><button class="btn btn-danger btn-sm delete-btn ">Del</button></th>    
     `;
 
      // Append the new row to the stats display container
      document.getElementById('stats-table').appendChild(newTableRow);
+
+     // Add event listener to the delete button
+     newTableRow.querySelector('.delete-btn').addEventListener('click', function() {
+        const row = this.parentElement.parentElement;
+        const id = row.getAttribute('data-id');
+        deleteData(id);
+        row.remove();
+        window.location.reload();
+     });
+}
+
+function deleteData(id) {
+    fetch('/delete_putt', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({id: id})
+    })
+    .then(response => response.json())
+    .then(result => {
+        // Handle the response from the server
+        console.log(result);
+    })
+    .catch(error => {
+        // Handle any errors
+        console.error(error);
+    });
 }
 
 function getColor(percentage, dist) {

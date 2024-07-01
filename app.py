@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import json
 import logging
-from data_handler import add_putt, read_data
+from data_handler import add_putt, read_data, delete_entry
 
 
 app = Flask(__name__)
@@ -24,6 +24,13 @@ def putt_post():
     add_putt(rec_data)
     logging.info('Data added successfully')
     return jsonify({'message': 'Data received successfully'})
+
+@app.route('/delete_putt', methods=['POST'])
+def delete_entry_route():
+    entry_id = request.json.get('id')
+    delete_entry(entry_id)
+    return jsonify({'status': 'success'})
+
 
 
 
