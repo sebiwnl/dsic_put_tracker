@@ -1,9 +1,7 @@
-# Flask web framework
-Flask==2.0.1
 
+Flask==3.0.3
 
+requests==2.32.1
 
-# Requests library for making HTTP requests
-requests==2.26.0
-
+Werkzeug==3.0.3
 
