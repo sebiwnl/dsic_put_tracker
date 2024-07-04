@@ -23,13 +23,13 @@ def putt_post():
     logging.info(f'Received data: {rec_data}')
     add_putt(rec_data)
     logging.info('Data added successfully')
-    return jsonify({'message': 'Data received successfully'})
+    return json.dumps(read_data())
 
 @app.route('/delete_putt', methods=['POST'])
 def delete_entry_route():
     entry_id = request.json.get('id')
     delete_entry(entry_id)
-    return jsonify({'status': 'success'})
+    return json.dumps(read_data())
 
 
 

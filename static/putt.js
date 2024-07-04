@@ -1,15 +1,12 @@
 const putts_thrown = 21;
 const current_c1x = 0;
+lets = c1xChart = null;
 
 
 
 
 document.getElementById('add-stats').addEventListener('click', function() {
     postPuttData();
-
-
-    // reload window
-    window.location.reload();
 });
 
 // Allow pressing Enter key to submit the form
@@ -19,10 +16,15 @@ document.addEventListener('keypress', function(event) {
     }
 });
 
+
 function postPuttData() {
     const putt6m = document.getElementById('putt-6m').value;
     const putt75m = document.getElementById('putt-7.5m').value;
     const putt95m = document.getElementById('putt-9.5m').value;
+
+    document.getElementById('putt-6m').value = '';
+    document.getElementById('putt-7.5m').value = '';
+    document.getElementById('putt-9.5m').value = '';
 
     const data = {
         date: getDate(),
@@ -42,7 +44,9 @@ function postPuttData() {
     .then(response => response.json())
     .then(result => {
         // Handle the response from the server
-        console.log('1',result);
+        removePuttingStats();
+        removeChart();
+        renderPuttingStats(result);
     })
     .catch(error => {
         // Handle any errors
@@ -60,10 +64,24 @@ function getDate() {
     return `${year}-${month}-${day}`;
 }
 
+function removePuttingStats() {
+    const stats = document.getElementById('stats-table');
+    while (stats.firstChild) {
+        stats.removeChild(stats.firstChild);
+    }
+}
+
+function removeChart() {
+    const chart = document.getElementById('c1xChart');
+    while (chart.firstChild) {
+        chart.removeChild(chart.firstChild);
+    }
+}
+
 function renderPuttingStats(payload) {
 
     // table
-    dataList = JSON.parse(payload)["putts"]
+    const dataList = typeof payload === 'string' ? JSON.parse(payload).putts : payload.putts;
     
     for(let i = 0; i < dataList.length; i++) {
         create_div(dataList[i]);
@@ -85,7 +103,11 @@ function renderPuttingStats(payload) {
 
 function renderChart(dates, c1xStats) {
     const ctx = document.getElementById('c1xChart').getContext('2d');
-    new Chart(ctx, {
+
+    if (c1xChart) {
+        c1xChart.destroy();
+    }
+    c1xChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: dates,
@@ -161,7 +183,6 @@ function create_div(dataList) {
         const id = row.getAttribute('data-id');
         deleteData(id);
         row.remove();
-        window.location.reload();
      });
 }
 
@@ -176,7 +197,9 @@ function deleteData(id) {
     .then(response => response.json())
     .then(result => {
         // Handle the response from the server
-        console.log(result);
+        removePuttingStats();
+        removeChart();
+        renderPuttingStats(result);
     })
     .catch(error => {
         // Handle any errors
