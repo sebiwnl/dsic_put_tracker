@@ -83,7 +83,34 @@
                     <!-- Data will be rendered here -->
                 </tbody>
             </table>
+
+        <footer class="fixed-bottom bg-secondary">
+            <div class="row align-items-center mb-4 ml-2 mr-2 mt-4">
+
+                <div class="col">
+                    <a href="/download" class="btn btn-primary">Download Data File (json)</a>
+    
+                </div>
+    
+                <div class="col input-group">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-primary" type="button" onclick="uploadFile()">Upload</button>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="fileInput">
+                        <label class="custom-file-label" for="inputGroupFile03">Choose file (json)</label>
+                    </div>
+                </div>
+    
+            </div>
+        </footer>
+
+        
+        
+           
         </div>
+        
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
