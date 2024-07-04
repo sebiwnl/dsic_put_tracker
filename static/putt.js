@@ -264,12 +264,19 @@ function postNotesData() {
         notes: notes
     };
 
+    let jsonString = JSON.stringify(data, (key, value) => {
+        if (typeof value === 'string') {
+            return value.replace(/\n/g, '\\n'); // Replace newline with escaped newline
+        }
+        return value;
+    });
+
     fetch('/update_notes', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: jsonString
     })
     .then(response => response.json())
     .then(result => {
