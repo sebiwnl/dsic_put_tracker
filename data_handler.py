@@ -8,7 +8,7 @@ DATA_FILE = 'data.json'
 def read_data(user=None):
     
     if not os.path.exists(DATA_FILE):
-        return {"putts": []}
+        return {"putts": [], "notes": ""}
     with open(DATA_FILE, 'r') as file:
         return json.load(file)
 
@@ -30,3 +30,19 @@ def add_putt(putt_data):
     data['putts'].append(putt_data)
     write_data(data)
     return
+
+def write_putts(data):
+    data = read_data()
+    data['putts'] = data
+    write_data(data)
+
+def read_notes():
+    if not os.path.exists(DATA_FILE):
+        return {"notes": ""}
+    with open(DATA_FILE, 'r') as file:
+        return json.load(file)
+
+def write_notes(notes):
+    data = read_data()
+    data['notes'] = notes
+    write_data(data)

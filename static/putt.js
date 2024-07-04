@@ -79,7 +79,7 @@ function removeChart() {
 }
 
 function renderPuttingStats(payload) {
-
+    console.log('payload', payload)
     // table
     const dataList = typeof payload === 'string' ? JSON.parse(payload).putts : payload.putts;
     
@@ -245,4 +245,43 @@ function getColor(percentage, dist) {
             return 'text-success';
         }
     }
+}
+
+
+
+
+// get text area notes
+document.getElementById('update_notes').addEventListener('click', function() {
+    postNotesData();
+});
+
+function postNotesData() {
+    const notes = document.getElementById('noteTextArea').value;
+
+    const data = {
+        notes: notes
+    };
+
+    fetch('/update_notes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        // Handle the response from the server
+        //document.getElementById('notes').value = result.notes;
+    })
+    .catch(error => {
+        // Handle any errors
+        console.error(error);
+    });
+}
+
+
+function renderNotes(notes) {
+    
+    document.getElementById('noteTextArea').value = JSON.parse(notes).notes;
 }
