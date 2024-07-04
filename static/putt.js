@@ -91,6 +91,8 @@ function renderPuttingStats(payload) {
     let dates = [];
     let c1xStats = [];
 
+    // revers datalist
+
     dataList.forEach(function(data) {
         dates.push(data['date']);
         let c1x = ((data['six'] + data['sevenfive'] + data['ninefive']) / (putts_thrown * 3))*100;

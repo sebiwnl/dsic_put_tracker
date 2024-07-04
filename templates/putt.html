@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Putt</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -15,7 +16,7 @@
     </style>
 </head>
 <body onload="renderPuttingStats('{{payload}}'), renderNotes('{{notes}}')">
-    <div class="container mt-5">
+    <div class="container mt-5 main-content">
         <div class="row align-items-center">
             <div class="col">
                 <h1>Putting Stats</h1>
@@ -60,7 +61,6 @@
 
 
         <div class="mt-5">
-            
             <canvas id="c1xChart" height="100"></canvas>
         </div>
 
@@ -83,35 +83,38 @@
                     <!-- Data will be rendered here -->
                 </tbody>
             </table>
+        </div>
 
-        <footer class="fixed-bottom bg-secondary">
+        <footer class="">
             <div class="row align-items-center mb-4 ml-2 mr-2 mt-4">
-
+    
                 <div class="col">
                     <a href="/download" class="btn btn-primary">Download Data File (json)</a>
-    
                 </div>
     
                 <div class="col input-group">
+    
                     <div class="input-group-prepend">
                         <button class="btn btn-primary" type="button" onclick="uploadFile()">Upload</button>
                     </div>
+    
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="fileInput">
-                        <label class="custom-file-label" for="inputGroupFile03" id="inputText">Choose file (json)</label>
+                        <label  class="custom-file-label" for="inputGroupFile03" id="inputText">Choose file (json)</label>
                     </div>
+                    
                 </div>
     
             </div>
         </footer>
-
-        
-        
-           
-        </div>
         
         
     </div>
+
+
+
+
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>

@@ -26,7 +26,7 @@ def delete_entry(entry_id):
 
 def add_putt(putt_data):
     data = read_data()
-    putt_data['id'] = str(uuid.uuid4())
+    putt_data['id'] = str(uuid.uuid4())    
     data['putts'].append(putt_data)
     write_data(data)
     return
